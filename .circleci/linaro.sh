@@ -48,7 +48,7 @@ FINAL_ZIP_ALIAS=Karenulgarde-${TANGGAL}.zip
 ##----------------------------------------------------------##
 # Specify compiler.
 
-COMPILER=azure
+COMPILER=nexus14
 
 ##----------------------------------------------------------##
 # Specify Linker
@@ -88,6 +88,11 @@ function cloneTC() {
 	elif [ $COMPILER = "azure" ];
 	then
 	git clone --depth=1 https://gitlab.com/Panchajanya1999/azure-clang clang
+	PATH="${KERNEL_DIR}/clang/bin:$PATH"
+	
+	elif [ $COMPILER = "nexus14" ];
+	then
+	git clone --depth=1 https://gitlab.com/Project-Nexus/nexus-clang.git -b nexus-14 clang
 	PATH="${KERNEL_DIR}/clang/bin:$PATH"
 
 	elif [ $COMPILER = "proton" ];
@@ -250,6 +255,7 @@ START=$(date +"%s")
 		
 	# Compile
 	make O=out ARCH=arm64 ${DEFCONFIG}
+	
 	if [ -d ${KERNEL_DIR}/clang ];
 	   then
 	       make -kj$(nproc --all) O=out \
