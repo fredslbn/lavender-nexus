@@ -252,20 +252,21 @@ START=$(date +"%s")
 	make O=out ARCH=arm64 ${DEFCONFIG}
 	if [ -d ${KERNEL_DIR}/clang ];
 	   then
-	       make -j$(nproc --all) O=out \
+	       make -kj$(nproc --all) O=out \
 	       ARCH=arm64 \
-	       CC=$KERNEL_CLANG \
-           CROSS_COMPILE=$KERNEL_CCOMPILE64 \
-           CROSS_COMPILE_ARM32=$KERNEL_CCOMPILE32 \
-           LD=${LINKER} \
-           LLVM=1 \
-           LLVM_IAS=1 \
-           AR=llvm-ar \
-           NM=llvm-nm \
-           OBJCOPY=llvm-objcopy \
-           OBJDUMP=llvm-objdump \
-           STRIP=llvm-strip \
-	       CLANG_TRIPLE=aarch64-linux-gnu- \
+	       CC=clang \
+	       CROSS_COMPILE=aarch64-linux-gnu- \
+	       CROSS_COMPILE_COMPAT=arm-linux-gnueabi- \
+	       #LD=${LINKER} \
+	       #LLVM=1 \
+	       #LLVM_IAS=1 \
+	       AR=llvm-ar \
+	       NM=llvm-nm \
+	       OBJCOPY=llvm-objcopy \
+	       OBJDUMP=llvm-objdump \
+	       STRIP=llvm-strip \
+	       #READELF=llvm-readelf \
+	       #OBJSIZE=llvm-size \
 	       V=$VERBOSE 2>&1 | tee error.log
 	       
 	elif [ -d ${KERNEL_DIR}/cosmic ];
