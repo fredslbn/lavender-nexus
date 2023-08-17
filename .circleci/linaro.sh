@@ -48,7 +48,7 @@ FINAL_ZIP_ALIAS=Karenulgarde-${TANGGAL}.zip
 ##----------------------------------------------------------##
 # Specify compiler.
 
-COMPILER=cosmic-clang
+COMPILER=azure
 
 ##----------------------------------------------------------##
 # Specify Linker
@@ -258,13 +258,13 @@ START=$(date +"%s")
            CROSS_COMPILE=$KERNEL_CCOMPILE64 \
            CROSS_COMPILE_ARM32=$KERNEL_CCOMPILE32 \
            LD=${LINKER} \
-           #LLVM=1 \
-           #LLVM_IAS=1 \
-           #AR=llvm-ar \
-           #NM=llvm-nm \
-           #OBJCOPY=llvm-objcopy \
-           #OBJDUMP=llvm-objdump \
-           #STRIP=llvm-strip \
+           LLVM=1 \
+           LLVM_IAS=1 \
+           AR=llvm-ar \
+           NM=llvm-nm \
+           OBJCOPY=llvm-objcopy \
+           OBJDUMP=llvm-objdump \
+           STRIP=llvm-strip \
 	       CLANG_TRIPLE=aarch64-linux-gnu- \
 	       V=$VERBOSE 2>&1 | tee error.log
 	       
