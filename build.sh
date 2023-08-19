@@ -169,7 +169,8 @@ function compile() {
 				READELF=llvm-readelf \
 				OBJSIZE=llvm-size \
 				V=$VERBOSE 2>&1 | tee error.log
-                                elif [ -d ${KERNEL_DIR}/gcc64 ]; then
+                
+                elif [ -d ${KERNEL_DIR}/gcc64 ]; then
 				make -kj$(nproc --all) O=out \
 				ARCH=arm64 \
 				CROSS_COMPILE_ARM32=arm-eabi- \
@@ -182,6 +183,7 @@ function compile() {
 				STRIP=llvm-strip \
 				OBJSIZE=llvm-size \
 				V=$VERBOSE 2>&1 | tee error.log
+				
 				elif [ -d ${KERNEL_DIR}/aosp-clang ]; then
 				make -kj$(nproc --all) O=out \
 				ARCH=arm64 \
