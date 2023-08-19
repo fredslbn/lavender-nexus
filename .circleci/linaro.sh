@@ -48,7 +48,7 @@ FINAL_ZIP_ALIAS=Karenulgarde-${TANGGAL}.zip
 ##----------------------------------------------------------##
 # Specify compiler.
 
-COMPILER=clang14-7
+COMPILER=azure
 
 ##----------------------------------------------------------##
 # Specify Linker
@@ -227,16 +227,16 @@ function cloneTC() {
 function exports() {
 	
         # Export KBUILD_COMPILER_STRING
-#        if [ -d ${KERNEL_DIR}/clang ];
-#           then
-#               export KBUILD_COMPILER_STRING=$(${KERNEL_DIR}/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
-#               export LD_LIBRARY_PATH="${KERNEL_DIR}/clang/lib:$LD_LIBRARY_PATH"
+        if [ -d ${KERNEL_DIR}/clang ];
+           then
+               export KBUILD_COMPILER_STRING=$(${KERNEL_DIR}/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
+               export LD_LIBRARY_PATH="${KERNEL_DIR}/clang/lib:$LD_LIBRARY_PATH"
         
-#        elif [ -d ${KERNEL_DIR}/gcc64 ];
-#           then
-#               export KBUILD_COMPILER_STRING=$("$KERNEL_DIR/gcc64"/bin/aarch64-elf-gcc --version | head -n 1)       
+        elif [ -d ${KERNEL_DIR}/gcc64 ];
+           then
+               export KBUILD_COMPILER_STRING=$("$KERNEL_DIR/gcc64"/bin/aarch64-elf-gcc --version | head -n 1)       
         
-        if [ -d ${KERNEL_DIR}/cosmic ];
+        elif [ -d ${KERNEL_DIR}/cosmic ];
            then
                export KBUILD_COMPILER_STRING=$(${KERNEL_DIR}/cosmic/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')        
         
@@ -305,7 +305,7 @@ START=$(date +"%s")
 	# Compile
 	make O=out ARCH=arm64 ${DEFCONFIG}
 	
-	if [ -d ${KERNEL_DIR}/clang1 ];
+	if [ -d ${KERNEL_DIR}/clang ];
 	   then
 	       make -kj$(nproc --all) O=out \
 	       ARCH=arm64 \
@@ -313,19 +313,19 @@ START=$(date +"%s")
 	       CROSS_COMPILE=aarch64-linux-gnu- \
 	       CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
 	       LD=${LINKER} \
-	       LLVM=1 \
-	       LLVM_IAS=1 \
+	       #LLVM=1 \
+	       #LLVM_IAS=1 \
 	       AR=llvm-ar \
 	       NM=llvm-nm \
 	       OBJCOPY=llvm-objcopy \
 	       OBJDUMP=llvm-objdump \
 	       STRIP=llvm-strip \
-	       READELF=llvm-readelf \
-	       OBJSIZE=llvm-size \
+	       #READELF=llvm-readelf \
+	       #OBJSIZE=llvm-size \
 	       V=$VERBOSE 2>&1 | tee error.log
 	
 	       
-	 elif [ -d ${KERNEL_DIR}/clang ];
+	 elif [ -d ${KERNEL_DIR}/clang1 ];
 	   then
 	       make -kj$(nproc --all) O=out \
 	       ARCH=arm64 \
