@@ -227,16 +227,16 @@ function cloneTC() {
 function exports() {
 	
         # Export KBUILD_COMPILER_STRING
-        if [ -d ${KERNEL_DIR}/clang ];
-           then
-               export KBUILD_COMPILER_STRING=$(${KERNEL_DIR}/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
-               export LD_LIBRARY_PATH="${KERNEL_DIR}/clang/lib:$LD_LIBRARY_PATH"
+#        if [ -d ${KERNEL_DIR}/clang ];
+#           then
+#               export KBUILD_COMPILER_STRING=$(${KERNEL_DIR}/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
+#               export LD_LIBRARY_PATH="${KERNEL_DIR}/clang/lib:$LD_LIBRARY_PATH"
         
-        elif [ -d ${KERNEL_DIR}/gcc64 ];
-           then
-               export KBUILD_COMPILER_STRING=$("$KERNEL_DIR/gcc64"/bin/aarch64-elf-gcc --version | head -n 1)       
+#        elif [ -d ${KERNEL_DIR}/gcc64 ];
+#           then
+#               export KBUILD_COMPILER_STRING=$("$KERNEL_DIR/gcc64"/bin/aarch64-elf-gcc --version | head -n 1)       
         
-        elif [ -d ${KERNEL_DIR}/cosmic ];
+        if [ -d ${KERNEL_DIR}/cosmic ];
            then
                export KBUILD_COMPILER_STRING=$(${KERNEL_DIR}/cosmic/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')        
         
@@ -332,10 +332,10 @@ START=$(date +"%s")
 	       CC=$KERNEL_CLANG \
            CROSS_COMPILE=$KERNEL_CCOMPILE64 \
            CROSS_COMPILE_ARM32=$KERNEL_CCOMPILE32 \
-           #CLANG_TRIPLE=aarch64-linux-gnu- \
+           CLANG_TRIPLE=aarch64-linux-gnu- \
            LD=${LINKER} \
-           LLVM=1 \
-           LLVM_IAS=1 \
+           #LLVM=1 \
+           #LLVM_IAS=1 \
            #AR=llvm-ar \
            #NM=llvm-nm \
            #OBJCOPY=llvm-objcopy \
