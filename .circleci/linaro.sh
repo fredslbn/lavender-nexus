@@ -48,7 +48,7 @@ FINAL_ZIP_ALIAS=Karenulgarde-${TANGGAL}.zip
 ##----------------------------------------------------------##
 # Specify compiler.
 
-COMPILER=azure
+COMPILER=nexus14
 
 ##----------------------------------------------------------##
 # Specify Linker
@@ -123,7 +123,8 @@ function cloneTC() {
     export KERNEL_CCOMPILE32_PATH="${KERNEL_DIR}/gcc32"
     export KERNEL_CCOMPILE32="arm-linux-gnueabihf-"
     export PATH="$KERNEL_CCOMPILE32_PATH/bin:$PATH"
-    
+ 
+       
     elif [ $COMPILER = "clang14-7" ];
 	then
 	#git clone https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/ -b android10-gsi --depth 1 --no-tags --single-branch clang_all
@@ -147,6 +148,7 @@ function cloneTC() {
     export KERNEL_CCOMPILE32_PATH="${KERNEL_DIR}/gcc32"
     export KERNEL_CCOMPILE32="arm-linux-gnueabihf-"
     export PATH="$KERNEL_CCOMPILE32_PATH/bin:$PATH"  
+
     
     elif [ $COMPILER = "clang17" ];
 	then
@@ -172,6 +174,7 @@ function cloneTC() {
     export KERNEL_CCOMPILE32="arm-linux-gnueabihf-"
     export PATH="$KERNEL_CCOMPILE32_PATH/bin:$PATH"
 
+
     elif [ $COMPILER = "clang17-7" ];
 	then
 	#git clone https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/ -b android10-gsi --depth 1 --no-tags --single-branch clang_all	
@@ -195,7 +198,6 @@ function cloneTC() {
     export KERNEL_CCOMPILE32_PATH="${KERNEL_DIR}/gcc32"
     export KERNEL_CCOMPILE32="arm-linux-gnueabihf-"
     export PATH="$KERNEL_CCOMPILE32_PATH/bin:$PATH"
-    
 
    
 	elif [ $COMPILER = "eva" ];
@@ -320,8 +322,8 @@ START=$(date +"%s")
 	       OBJCOPY=llvm-objcopy \
 	       OBJDUMP=llvm-objdump \
 	       STRIP=llvm-strip \
-	       #READELF=llvm-readelf \
-	       #OBJSIZE=llvm-size \
+	       READELF=llvm-readelf \
+	       OBJSIZE=llvm-size \
 	       V=$VERBOSE 2>&1 | tee error.log
 	
 	       
@@ -368,8 +370,8 @@ START=$(date +"%s")
 	       CROSS_COMPILE=aarch64-linux-gnu- \
 	       CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
 	       LD=${LINKER} \
-	       LLVM=1 \
-	       LLVM_IAS=1 \
+	       #LLVM=1 \
+	       #LLVM_IAS=1 \
 	       AR=llvm-ar \
 	       NM=llvm-nm \
 	       OBJCOPY=llvm-objcopy \
