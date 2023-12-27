@@ -41,7 +41,7 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 TANGGAL=$(date +"%F%S")
 
 # Specify Final Zip Name
-ZIPNAME="SUPER.KERNEL-LAVENDER-CLO-$(TZ=Asia/Jakarta date +"%Y%m%d-%H%M").zip"
+ZIPNAME="SUPER.KERNEL-LAVENDER-4.4-CLO-$(TZ=Asia/Jakarta date +"%Y%m%d-%H%M").zip"
 FINAL_ZIP=${ZIPNAME}-${DEVICE}-${TANGGAL}.zip
 FINAL_ZIP_ALIAS=Karenulgarde-${TANGGAL}.zip
 
